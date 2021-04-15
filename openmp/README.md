@@ -3,16 +3,18 @@
 # OpenMP
 
 **comando de compilação**
-'''sh
+```sh
 gcc matrix_openmp.c -fopenmp -o matrix_openmp
-'''sh
+```sh
 
 **comando de execução**
-'''sh
+
+```sh
 ./matrix_openmp
-'''sh
+```sh
 
 **comando de tempo execução**
-'''sh
+
+```sh
 time ./matrix_openmp
-'''sh
+```sh
