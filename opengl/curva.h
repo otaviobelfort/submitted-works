@@ -1,0 +1,81 @@
+#ifndef CURVAS_H
+#define CURVAS_H
+//http://www.glprogramming.com/red/chapter12.html
+
+#include <stdlib.h>
+#include <GL/freeglut.h>
+
+namespace curvas {
+    int window;
+    GLfloat ctrlpoints[4][3] = {
+        { -4.0, -4.0, 0.0},
+        { -2.0, 4.0, 0.0},
+        {2.0, -4.0, 0.0},
+        {4.0, 4.0, 0.0}
+    };
+
+    void display(void) {
+        int i;
+
+        glClear(GL_COLOR_BUFFER_BIT);
+        glColor3f(1.0, 1.0, 1.0);
+        glBegin(GL_LINE_STRIP);
+        for (i = 0; i <= 30; i++)
+            glEvalCoord1f((GLfloat) i / 30.0);
+        glEnd();
+
+        glPointSize(5.0);
+        glColor3f(1.0, 1.0, 0.0);
+        glBegin(GL_POINTS);
+        for (i = 0; i < 4; i++)
+            glVertex3fv(&ctrlpoints[i][0]);
+        glEnd();
+        glFlush();
+    }
+
+    void reshape(int w, int h) {
+        glViewport(0, 0, (GLsizei) w, (GLsizei) h);
+        glMatrixMode(GL_PROJECTION);
+        glLoadIdentity();
+        if (w <= h)
+            glOrtho(-5.0, 5.0, -5.0 * (GLfloat) h / (GLfloat) w,
+                5.0 * (GLfloat) h / (GLfloat) w, -5.0, 5.0);
+        else
+            glOrtho(-5.0 * (GLfloat) w / (GLfloat) h,
+                5.0 * (GLfloat) w / (GLfloat) h, -5.0, 5.0, -5.0, 5.0);
+        glMatrixMode(GL_MODELVIEW);
+        glLoadIdentity();
+    }
+
+    void keyboard(unsigned char key, int x, int y) {
+        switch (key) {
+            case 27: printf("Finalizando FONTES.");
+                glutDestroyWindow(window);
+                break;
+        }
+    }
+
+    void init(void) {
+        glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+        glutInitWindowSize(500, 500);
+        glutInitWindowPosition(100, 100);
+        window = glutCreateWindow("Curva Spline");
+        glClearColor(0.0, 0.0, 0.0, 0.0);
+        glShadeModel(GL_FLAT);
+        glMap1f(GL_MAP1_VERTEX_3, 0.0, 1.0, 3, 4, &ctrlpoints[0][0]);
+        glEnable(GL_MAP1_VERTEX_3);
+        glutKeyboardFunc(keyboard);
+        glutDisplayFunc(display);
+        glutReshapeFunc(reshape);
+    }
+
+}
+
+void curva() {
+    curvas::init();
+    glutMainLoop();
+}
+
+
+#endif /* CURVAS_H */
+
