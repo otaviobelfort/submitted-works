@@ -18,6 +18,7 @@ int main (int argc, char *argv[]){
    	 	A[i][j] = 2.0;
    	 	B[i][j] = 3.0;
 		//C[i][j] = 9.0;
+		
    	}
    }
    
