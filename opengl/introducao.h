@@ -11,7 +11,7 @@ namespace intro {
         glClear(GL_COLOR_BUFFER_BIT);
         glColor3f(0.0, 0.0, 0.0);
         glBegin(GL_LINES);
-        glVertex2i(40, 200);
+        glVertex2i(40.5, 200);
         glVertex2i(200, 10);
         glEnd();
         glFlush();

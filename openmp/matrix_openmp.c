@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include <omp.h>
-#include <time.h>
+//#include <time.h>
+
 int main (int argc, char *argv[]){
 
-   int TAM = 1000;
+   int TAM = 4;
    float A[TAM][TAM];
    float B[TAM][TAM];
    float C[TAM][TAM];
@@ -16,12 +17,13 @@ int main (int argc, char *argv[]){
    {
    	for (j = 0; j < TAM; j++)
    	{
-   	 	A[i][j] = 2;
-   	 	B[i][j] = 3;
+   	 	A[i][j] = 2.0;
+   	 	B[i][j] = 3.0;
+		//C[i][j] = 9.0;
    	}
    }
    
-   float x = clock();
+   //float x = clock();
    float y = 0;
    float z = 0;
 
@@ -41,7 +43,9 @@ int main (int argc, char *argv[]){
    		for (j = 0; j < TAM; j++)
    		{
    			C[i][j] = A[i][j] + B[i][j];
+			printf("C[%d][%d] = %f   \n", i, j, C[i][j]);
    		}
+		   
    	}
    }
  
@@ -49,13 +53,10 @@ int main (int argc, char *argv[]){
    {
    	for (j = 0; j < TAM; j++)
    	{
-   		//printf("C[%d][%d] = %f\n", i, j, C[i][j]);
+   		printf("C[%d][%d] = %f  -- %f | %f \n", i, j, C[i][j], A[i][j], B[i][j]);
    	}
    }
-   
    return 0;
- }
- 
- 
-   			
-   
+
+}
+
